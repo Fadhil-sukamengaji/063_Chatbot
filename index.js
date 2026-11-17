@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.sendFile("/public/index.html");
+    res.redirect("/index.html");
 });
 
 app.post("/api/chat", async (req, res) => {
@@ -27,7 +27,6 @@ app.post("/api/chat", async (req, res) => {
             "https://api.openrouter.ai/v1/chat/completions", 
             {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
@@ -59,23 +58,53 @@ app.post("/api/chat", async (req, res) => {
 
         while (true) {
             const { done, value } = await reader.read();
-            if (done) 
+            if (done) {
                 break;
+            }
+
+            buffer += decoder.decode(value, {
+                stream: true
+            });
+            const lines = buffer.split("\n");
+            buffer = lines.pop();
+
+            for (const line of lines) {
+                const trimmedLine = line.trim();
+
+                if (!trimmedLine || !trimmedLine.startsWith("data: ")) {
+                    continue;
+                }
+
+                const data = trimmedLine.slice(5).trim();
+                if (data === "[DONE]") {
+                    continue;
+                }
+
+                try {
+                    const json = JSON.parse(data);
+                    const content = json.choices?.[0].delta?.content;
+                    if (content) {
+                        res.write(`data: ${JSON.stringify(content)}\n\n`);
+                    }
+                } catch (error) {
+                    console.error("Gagal parsing streaming data:", error);
+                }
+            }    
         }
+        res.write("data: [DONE]\n\n");
+        res.end();
 
-        buffer += decoder.decode(value, {
-            stream: true
-        });
-        const lines = buffer.split("\n");
-        buffer = lines.pop();
+    } catch (error) {
+        console.error("server error:", error);
+        if (!res.headersSent) {
+            res.status(500).json({error: "Terjadi kesalahan pada server"});
+        } else {
+            res.write(`data: ${JSON.stringify("Terjadi kesalahan pada server")}\n\n`);
+            res.end();
+        }
+    }
+});
 
-        for (const line of lines) {
-            const trimmedLine = line.trim();
-
-            if (!trimmedLine) {
-                continue;
-            }
-            if (!trimmedLine.startsWith("data: ")) {
-                continue;
-            }
-            
+app.listen(port, () => {
+    console.log(`Server berjalan di http://localhost:${port}`);
+});
