@@ -1,0 +1,290 @@
+:root {
+    --primary-blue: #0A196F;
+    --accent-blue: #1428A0;
+    --bright-yellow: #FFD700;
+    --yellow-glow: rgba(255, 215, 0, 0.4);
+    --text-light: #ffffff;
+    --text-muted: #cbd5e1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at center, #1b32c5 0%, #081250 100%);
+    color: var(--text-light);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Dekorasi Ikon Melayang di Latar Belakang */
+.floating-icon {
+    position: absolute;
+    color: var(--bright-yellow);
+    font-size: 2rem;
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+}
+.icon-1 { top: 20%; left: 15%; animation-delay: 0s; }
+.icon-2 { bottom: 25%; left: 18%; animation-delay: 1.5s; font-size: 2.5rem; }
+.icon-3 { top: 25%; right: 18%; animation-delay: 3s; }
+.icon-4 { bottom: 30%; right: 15%; animation-delay: 4.5s; font-size: 2.2rem; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Bingkai Ponsel (Mockup) */
+.phone-frame {
+    position: relative;
+    width: 390px;
+    height: 82vh;
+    background: #0d1b7a;
+    border: 4px solid var(--bright-yellow);
+    border-radius: 40px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.25), 0 20px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.phone-speaker {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 5px;
+    background: var(--bright-yellow);
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+.phone-home-indicator {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+/* Header Chat */
+.chat-header {
+    margin-top: 25px;
+    padding: 15px 20px;
+    background: rgba(10, 25, 111, 0.9);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bot-avatar-header {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--bright-yellow);
+    color: var(--primary-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.chat-header h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.status-indicator .dot {
+    width: 6px;
+    height: 6px;
+    background-color: #10b981;
+    border-radius: 50%;
+}
+
+#clear-chat {
+    background: transparent;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: var(--bright-yellow);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#clear-chat:hover {
+    background: rgba(255, 215, 0, 0.2);
+}
+
+/* Ruang Pesan */
+.chat-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 4px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 4px;
+}
+
+.message-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    max-width: 85%;
+}
+
+.message-wrapper.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message-wrapper.bot {
+    align-self: flex-start;
+}
+
+.avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.bot-avatar {
+    background: rgba(255, 215, 0, 0.15);
+    color: var(--bright-yellow);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.user-avatar {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.message {
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.user-message {
+    background: var(--bright-yellow);
+    color: var(--primary-blue);
+    font-weight: 600;
+    border-bottom-right-radius: 2px;
+}
+
+.bot-message {
+    background: rgba(20, 40, 160, 0.6);
+    color: var(--text-light);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-bottom-left-radius: 2px;
+}
+
+/* Input Area */
+.chat-input-area {
+    padding: 14px 16px 24px 16px;
+    background: rgba(10, 25, 111, 0.9);
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(5, 15, 70, 0.8);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 12px;
+    padding: 4px 6px 4px 14px;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--bright-yellow);
+    box-shadow: 0 0 10px var(--yellow-glow);
+}
+
+.input-wrapper input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.input-wrapper input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.input-wrapper button {
+    background: var(--bright-yellow);
+    color: var(--primary-blue);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.input-wrapper button:hover {
+    transform: scale(1.05);
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-scene">
+
+        <div class="floating-icon icon-1"><i class="fa-solid fa-robot"></i></div>
+        <div class="floating-icon icon-2"><i class="fa-solid fa-users"></i></div>
+        <div class="floating-icon icon-3"><i class="fa-solid fa-comments"></i></div>
+        <div class="floating-icon icon-4"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+
+        <div class="phone-frame">
+            <div class="phone-speaker"></div>
+            
+            <div class="chat-header">
+                <div class="header-info">
+                    <div class="bot-avatar-header">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h2>AI Assistant</h2>
+                        <div class="status-indicator">
+                            <span class="dot"></span>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="clear-chat" title="Bersihkan Percakapan">
+                    <i class="fa-regular fa-trash-can"></i>
+                </button>
+            </div>
+
+            <div id="chat-messages" class="chat-messages">
+                <div class="message-wrapper bot">
+                    <div class="avatar bot-avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="message bot-message">
+                        Halo! Ada yang bisa saya bantu hari ini?
+                    </div>
+                </div>
+            </div>
+
+            <form id="chat-form" class="chat-input-area">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="user-input" 
+                        placeholder="Ketik pesan..." 
+                        autocomplete="off" 
+                        required
+                    >
+                    <button type="submit" id="send-button" title="Kirim">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </form>
+            
+            <div class="phone-home-indicator"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
