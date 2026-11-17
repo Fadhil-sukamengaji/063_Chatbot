@@ -69,4 +69,13 @@ app.post("/api/chat", async (req, res) => {
         const lines = buffer.split("\n");
         buffer = lines.pop();
 
-        
+        for (const line of lines) {
+            const trimmedLine = line.trim();
+
+            if (!trimmedLine) {
+                continue;
+            }
+            if (!trimmedLine.startsWith("data: ")) {
+                continue;
+            }
+            
